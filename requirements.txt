@@ -1,0 +1,13 @@
+opencv-python==4.8.1.78 
+opencv-contrib-python==4.8.1.78 
+ultralytics==8.0.211 
+torch==2.1.1 
+torchvision==0.16.1 
+numpy==1.24.3 
+scipy==1.11.4 
+pandas==2.1.1 
+matplotlib==3.8.1 
+sqlalchemy==2.0.23 
+flask==3.0.0 
+pyyaml==6.0.1 
+loguru==0.7.2 
