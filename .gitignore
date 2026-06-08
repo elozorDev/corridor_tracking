@@ -1,0 +1,34 @@
+# Sanal ortamlar
+.venv/
+venv/
+corridor-env/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Model (ilk çalıştırmada otomatik indirilir)
+yolov8n.pt
+yolov8*.pt
+
+# Büyük medya — yerelde tut, repoya ekleme
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# Çıktılar ve geçici dosyalar
+reports/*.json
+doors_calibrated.jpg
+doors_detected*.jpg
+result_annotated.jpg
+import cv2.txt
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

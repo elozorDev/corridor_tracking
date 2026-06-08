@@ -249,6 +249,7 @@ def run_monitor(
     lost_frames: int = 100,
     conf: float = 0.35,
     live_clock: bool = False,
+    device: str | None = None,
 ) -> None:
     doors = load_config(config_path)
 
@@ -277,7 +278,10 @@ def run_monitor(
             m, s = divmod(r, 60)
             t_str = f"{h:02d}:{m:02d}:{s:02d}.{ms:03d}"
 
-        dets = model(frame, conf=conf, verbose=False)[0].boxes
+        predict_kw: dict = {"conf": conf, "verbose": False}
+        if device is not None:
+            predict_kw["device"] = device
+        dets = model(frame, **predict_kw)[0].boxes
         centers: list[tuple[int, int]] = []
         for b in dets:
             x1, y1, x2, y2 = map(int, b.xyxy[0].tolist())
@@ -404,12 +408,24 @@ def main() -> None:
     r.add_argument("--report", type=Path, default=ROOT / "reports" / "last_run.json")
     r.add_argument("--live-clock", action="store_true", help="Gerçek saat damgası (webcam/canlı için)")
     r.add_argument("--conf", type=float, default=0.35)
+    r.add_argument(
+        "--device",
+        default=None,
+        help="cpu, cuda veya 0 — belirtilmezse PyTorch otomatik seçer (GPU varsa kullanır)",
+    )
 
     args = p.parse_args()
     if args.cmd == "calibrate":
         calibrate(args.image, args.config, args.preview, interactive=args.interactive)
     else:
-        run_monitor(args.video, args.config, args.report, live_clock=args.live_clock, conf=args.conf)
+        run_monitor(
+            args.video,
+            args.config,
+            args.report,
+            live_clock=args.live_clock,
+            conf=args.conf,
+            device=args.device,
+        )
 
 
 if __name__ == "__main__":

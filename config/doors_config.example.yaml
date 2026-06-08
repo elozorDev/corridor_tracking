@@ -1,0 +1,14 @@
+# Örnek kapı konfigürasyonu.
+# Kendi koridorunuz için: python src/corridor_app.py calibrate --interactive
+# Sonra bu dosyayı doors_config.yaml olarak kullanın.
+
+doors:
+  - id: 1
+    name: "Oda 101"
+    x_position: 300   # Kapının önündeki dikey çizgi (piksel, soldan)
+  - id: 2
+    name: "Oda 102"
+    x_position: 600
+  - id: 3
+    name: "Oda 103"
+    x_position: 900
